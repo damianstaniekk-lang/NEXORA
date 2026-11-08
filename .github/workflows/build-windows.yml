@@ -1,0 +1,42 @@
+
+name: Build NEXORA Windows Installer
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "nexora-windows/windows-app/**"
+      - ".github/workflows/build-windows.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    defaults:
+      run:
+        working-directory: nexora-windows/windows-app
+
+    steps:
+      - name: Download source code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Windows installer
+        run: npm run dist
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: NEXORA-Windows-Installer
+          path: nexora-windows/windows-app/dist/*.exe
+          if-no-files-found: error
