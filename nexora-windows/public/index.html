@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11121a">
+  <title>NEXORA — Dein privater Workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main id="authView" class="auth-shell">
+    <section class="brand-panel">
+      <div class="brand"><span class="brand-mark">N</span><span>NEXORA</span></div>
+      <div class="brand-copy">
+        <span class="eyebrow">YOUR SPACE. YOUR THOUGHTS.</span>
+        <h1>Alles, was<br>du denkst.<br><em>Ein Ort.</em></h1>
+        <p>Ein aufgeräumter Ort für Ideen, Pläne und alles, was du festhalten willst.</p>
+      </div>
+      <div class="brand-foot"><span class="pulse"></span> Dein persönlicher Workspace</div>
+    </section>
+    <section class="auth-panel glass">
+      <div class="mobile-brand brand"><span class="brand-mark">N</span><span>NEXORA</span></div>
+      <div class="auth-top"><span class="eyebrow">WILLKOMMEN BEI NEXORA</span><button id="themeAuth" class="icon-btn" aria-label="Design wechseln">◐</button></div>
+      <div class="auth-heading"><h2 id="authTitle">Schön, dass du da bist.</h2><p id="authSub">Melde dich an und mach weiter, wo du aufgehört hast.</p></div>
+      <form id="authForm">
+        <label>Benutzername<input id="username" autocomplete="username" minlength="3" maxlength="24" placeholder="Dein Benutzername" required></label>
+        <label>Passwort<input id="password" type="password" autocomplete="current-password" placeholder="Mindestens 12 Zeichen" required></label>
+        <button class="primary-btn full" id="authSubmit">Einloggen <span>→</span></button>
+      </form>
+      <div id="authError" class="message" role="alert"></div>
+      <p class="switch-auth"><span id="switchText">Noch kein Konto?</span> <button id="switchMode">Jetzt registrieren</button></p>
+      <p class="privacy-note">🔒 Hinweis: NEXORA-Admins können Nutzerkonten und deren Notizen einsehen. Verwende keine besonders vertraulichen Informationen.</p>
+    </section>
+  </main>
+
+  <main id="appView" class="app-shell hidden">
+    <aside class="sidebar glass">
+      <div class="brand"><span class="brand-mark">N</span><span>NEXORA</span></div>
+      <div class="side-label">WORKSPACE</div>
+      <button class="side-link active" id="allNotesBtn"><span>▤</span> Alle Notizen <span class="side-count" id="noteCount">0</span></button>
+      <button class="side-link" id="newNoteSide"><span>＋</span> Neue Notiz</button>
+      <div class="sidebar-bottom">
+        <button id="adminNav" class="side-link hidden"><span>♙</span> Admin-Bereich</button>
+        <button id="themeApp" class="side-link"><span>◐</span> Design wechseln</button>
+        <div class="profile">
+          <div class="avatar" id="avatar">N</div><div class="profile-info"><strong id="profileName">Nutzer</strong><small id="profileRole">Mitglied</small></div>
+          <button id="logoutBtn" class="icon-btn" title="Ausloggen">↗</button>
+        </div>
+      </div>
+    </aside>
+
+    <section class="main-content">
+      <header class="topbar"><div><span class="eyebrow" id="sectionEyebrow">DEIN WORKSPACE</span><h2 id="pageTitle">Deine Notizen</h2></div><button id="newNoteTop" class="primary-btn">＋ <span>Neue Notiz</span></button></header>
+      <section id="notesSection">
+        <div class="toolbar"><div class="searchbox"><span>⌕</span><input id="searchInput" placeholder="Notizen durchsuchen..."></div><span class="subtle" id="notesHint">Deine Gedanken, an einem Ort.</span></div>
+        <div id="notesGrid" class="notes-grid"></div>
+        <div id="emptyState" class="empty-state hidden"><div class="empty-icon">✦</div><h3>Noch ist hier alles ruhig.</h3><p>Erstelle deine erste Notiz und bring deine Gedanken aufs Papier.</p><button id="emptyCreate" class="primary-btn">Erste Notiz erstellen →</button></div>
+      </section>
+      <section id="editorSection" class="editor-section hidden">
+        <button id="backNotes" class="back-link">← Zurück zu deinen Notizen</button>
+        <input id="noteTitle" class="note-title" placeholder="Titel deiner Notiz...">
+        <textarea id="noteBody" class="note-body" placeholder="Schreib deine Gedanken auf..."></textarea>
+        <div class="editor-footer"><span id="saveStatus">Noch nicht gespeichert</span><button id="deleteNote" class="danger-btn hidden">Notiz löschen</button><button id="saveNote" class="primary-btn">Speichern</button></div>
+      </section>
+      <section id="adminSection" class="admin-section hidden">
+        <div class="admin-intro"><div><span class="eyebrow">CONTROL CENTER</span><h3>Nutzerverwaltung</h3><p>Verwalte Konten und prüfe Inhalte. Nutzer werden bei der Registrierung darüber informiert.</p></div><div class="admin-stat"><strong id="userTotal">0</strong><span>Konten</span></div></div>
+        <div class="table-wrap"><table><thead><tr><th>NUTZER</th><th>ROLLE</th><th>NOTIZEN</th><th>STATUS</th><th>AKTIONEN</th></tr></thead><tbody id="usersTable"></tbody></table></div>
+        <div id="adminNotes" class="admin-notes hidden"><div class="admin-note-head"><div><span class="eyebrow">NUTZERINHALTE</span><h3 id="adminNotesTitle">Notizen</h3></div><button id="closeAdminNotes" class="secondary-btn">Schließen</button></div><div id="adminNotesList" class="admin-note-list"></div></div>
+      </section>
+    </section>
+  </main>
+  <div id="toast" class="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

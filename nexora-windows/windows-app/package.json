@@ -1,0 +1,30 @@
+{
+  "name": "nexora-desktop",
+  "version": "1.0.0",
+  "description": "NEXORA Windows desktop app",
+  "main": "main.cjs",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "de.nexora.desktop",
+    "productName": "NEXORA",
+    "directories": { "output": "dist" },
+    "files": ["main.cjs", "preload.cjs", "setup.html", "setup.js"],
+    "win": { "target": ["nsis"], "artifactName": "NEXORA-Setup-${version}.${ext}" },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "NEXORA"
+    }
+  }
+}
