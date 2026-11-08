@@ -33,7 +33,7 @@ function createWindow() {
     const cfgNow = readConfig();
     if (cfgNow.serverUrl && url.startsWith(cfgNow.serverUrl)) return;
     if (url.startsWith('https://')) { event.preventDefault(); shell.openExternal(url); }
-  });
+ preload: path.join(__dirname, 'preload.js')
 }
 ipcMain.handle('nexora:get-config', () => ({ serverUrl: readConfig().serverUrl || '' }));
 ipcMain.handle('nexora:save-server', async (_event, value) => {
