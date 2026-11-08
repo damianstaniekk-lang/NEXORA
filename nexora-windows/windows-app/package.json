@@ -19,12 +19,6 @@
     "directories": {
       "output": "dist"
     },
-    "files": [
-      "main.js",
-      "preload.js",
-      "setup.html",
-      "setup.js"
-    ],
     "win": {
       "target": ["nsis"],
       "artifactName": "NEXORA-Setup-${version}.${ext}"
